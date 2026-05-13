@@ -1,4 +1,9 @@
-
-export default function Header() {
-  return <header><h1>Gestión de Proyectos</h1></header>;
+function Header() {
+  return (
+    <header className="header-menu">
+      <h2 id="titulo">Explorador de Proyectos</h2>
+    </header>
+  );
 }
+
+export default Header;
