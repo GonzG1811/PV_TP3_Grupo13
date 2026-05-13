@@ -1,0 +1,1 @@
+export default function Footer() { return <footer><p>Grupo 13 - 2026</p></footer>; }
