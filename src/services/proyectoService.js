@@ -15,7 +15,8 @@ const proyectoService = (() => {
     const obtenerProyectos = () => [...proyectos]; 
         // Agrega un nuevo proyecto al arreglo.
     const agregarProyecto = (nuevo) => { 
-        proyectos.push(nuevo);
+        const nuevoId = proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id)) + 1 : 1;
+        proyectos.push({ id: nuevoId, ...nuevo });
     };
     // filter genera un nuevo arreglo excluyendo
         // el proyecto cuyo id coincida.

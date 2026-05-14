@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
+import FormularioProyecto from './FormularioProyecto';
 
 const ListaProyectos = () => {
 
     const [proyectos, setProyectos] = useState(obtenerProyectos());
 
+    const actualizarLista = () => {
+        setProyectos(obtenerProyectos());
+    };
 
     const handleEliminar = (id) => {
         eliminarProyecto(id);
-        setProyectos(obtenerProyectos());
+        actualizarLista();
     };
 
     const handleBuscar = (e) => {
@@ -18,7 +22,8 @@ const ListaProyectos = () => {
 
     return (
         <main>
-            {}
+            <FormularioProyecto alGuardar={actualizarLista} />
+
             <section className="search-section">
                 <input 
                     type="text" 
