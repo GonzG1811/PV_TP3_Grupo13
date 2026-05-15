@@ -23,23 +23,23 @@ const ListaProyectos = () => {
     return (
         <main>
             <FormularioProyecto alGuardar={actualizarLista} />
-
-            <section className="search-section">
+            <section style={{ marginTop: '30px', marginBottom: '10px' }}>
                 <input 
                     type="text" 
-                    placeholder="Buscar proyecto..." 
+                    placeholder="Buscar proyecto por nombre..." 
                     onChange={handleBuscar} 
+                    style={{ width: '100%', padding: '10px' }}
                 />
             </section>
-
-            <section className="proyectos-list">
-                {}
+            <section className="contenedor-cards">
                 {proyectos.map((proy) => (
-                    <div key={proy.id} className="proyecto-card">
+                    <div key={proy.id} className="card">
                         <h3>{proy.titulo}</h3>
-                        <p>{proy.categoria} - <span>{proy.estado}</span></p>
-                        {}
-                        <button onClick={() => handleEliminar(proy.id)}>
+                        <p>{proy.categoria} - <strong>{proy.estado}</strong></p>
+                        <button 
+                            onClick={() => handleEliminar(proy.id)}
+                            style={{ backgroundColor: '#dc2626', marginTop: '10px' }}
+                        >
                             Eliminar
                         </button>
                     </div>
