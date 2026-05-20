@@ -3,24 +3,23 @@ import { agregarProyecto } from '../services/proyectoService';
 
 function FormularioProyecto({ alGuardar }) {
 
-    const [titulo, setTitulo] = useState('');
-    const [categoria, setCategoria] = useState('');
-    const [estado, setEstado] = useState('Pendiente');
+    const [proyectoData, setProyectoData] = useState({
+        titulo: '',
+        categoria: '',
+        estado: 'Pendiente'
+    });
 
     const manejarEnvio = (e) => {
         e.preventDefault();
 
-        const nuevoProyecto = {
-            titulo,
-            categoria,
-            estado
-        };
+        // Como "proyectoData" ya es un objeto, se manda directo
+        agregarProyecto(proyectoData);
 
-        agregarProyecto(nuevoProyecto);
-
-        setTitulo('');
-        setCategoria('');
-        setEstado('Pendiente');
+        setProyectoData({
+            titulo: '',
+            categoria: '',
+            estado: 'Pendiente'
+        });
 
         alGuardar();
     };
@@ -31,10 +30,11 @@ function FormularioProyecto({ alGuardar }) {
             <form onSubmit={manejarEnvio} className="form-crear">
                 <div className="input-group">
                     <label>Nombre del proyecto:</label>
+                    {/* PERSONA A: Actualiza el value y el onChange para apuntar al objeto */}
                     <input 
                         type="text" 
-                        value={titulo} 
-                        onChange={(e) => setTitulo(e.target.value)} 
+                        value={proyectoData.titulo} 
+                        onChange={(e) => setProyectoData({ ...proyectoData, titulo: e.target.value })} 
                         placeholder="..." 
                         required 
                     />
@@ -44,8 +44,8 @@ function FormularioProyecto({ alGuardar }) {
                     <label>Tema / Categoría:</label>
                     <input 
                         type="text" 
-                        value={categoria} 
-                        onChange={(e) => setCategoria(e.target.value)} 
+                        value={proyectoData.categoria} 
+                        onChange={(e) => setProyectoData({ ...proyectoData, categoria: e.target.value })} 
                         placeholder="..." 
                         required 
                     />
@@ -53,7 +53,10 @@ function FormularioProyecto({ alGuardar }) {
 
                 <div className="input-group">
                     <label>Estado:</label>
-                    <select value={estado} onChange={(e) => setEstado(e.target.value)}>
+                    <select 
+                        value={proyectoData.estado} 
+                        onChange={(e) => setProyectoData({ ...proyectoData, estado: e.target.value })}
+                    >
                         <option value="Pendiente">Pendiente</option>
                         <option value="En curso">En curso</option>
                         <option value="Finalizado">Finalizado</option>
