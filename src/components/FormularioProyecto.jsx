@@ -6,22 +6,27 @@ function FormularioProyecto({ alGuardar }) {
     const [titulo, setTitulo] = useState('');
     const [categoria, setCategoria] = useState('');
     const [estado, setEstado] = useState('Pendiente');
-
+    const [descripcion, setDescripcion] = useState('');
     const manejarEnvio = (e) => {
         e.preventDefault();
 
-        const nuevoProyecto = {
-            titulo,
-            categoria,
-            estado
-        };
+       const nuevoProyecto = {
+        titulo,
+        categoria,
+        estado,
+        descripcion,
+
+        recursos: [],
+
+        equipo: []
+};
 
         agregarProyecto(nuevoProyecto);
 
         setTitulo('');
         setCategoria('');
         setEstado('Pendiente');
-
+        setDescripcion('');
         alGuardar();
     };
 
@@ -58,6 +63,16 @@ function FormularioProyecto({ alGuardar }) {
                         <option value="En curso">En curso</option>
                         <option value="Finalizado">Finalizado</option>
                     </select>
+                </div>
+                <div className="input-group">
+                <label>Descripción:</label>
+
+                 <textarea
+                        value={descripcion}
+                        onChange={(e) => setDescripcion(e.target.value)}
+                        placeholder="Descripción del proyecto"
+                        required
+                    />
                 </div>
 
                 <button type="submit" className="btn-crear">Crear Proyecto</button>

@@ -3,11 +3,58 @@
     // Cada objeto representa un proyecto.
 const proyectoService = (() => {
     let proyectos = [
-        { id: 1, titulo: "C++", categoria: "Programación", estado: "Finalizado" },
-        { id: 2, titulo: "HTML", categoria: "Maquetación", estado: "Finalizado" },
-        { id: 3, titulo: "CSS", categoria: "Diseño", estado: "En curso" },
-        { id: 4, titulo: "JavaScript", categoria: "Interactividad", estado: "En curso" },
-        { id: 5, titulo: "Python", categoria: "Data Science", estado: "Pendiente" },
+        { id: 1, titulo: "C++", categoria: "Programación", estado: "Finalizado",descripcion: "Proyecto enfocado en el aprendizaje de programación estructurada utilizando C++. Se desarrollaron algoritmos básicos aplicando variables, funciones, condiciones y ciclos. Además, se realizaron ejercicios prácticos orientados as mejorar la lógica de programación y la resolución de problemas mediante estructuras de control y arreglos",recursos:["PDF , introducción a C++","Drive Proyecto Final","GitHub repositorio C++"],equipo:[{nombre: "Valen",rol:"Desarrollador",},{nombre:"Mateo",rol:"Tester"}] },
+        { id: 2, titulo: "HTML", categoria: "Maquetación", estado: "Finalizado",descripcion: "Proyecto destinado al aprendizaje de HTML5 y la estructura básica de páginas web. Se trabajó con etiquetas semánticas, formularios, tablas e inserción de multimedia. También se aplicaron buenas prácticas de organización del contenido para mejorar la accesibilidad y la compatibilidad entre distintos navegadores.",
+        recursos: [
+            "PDF Etiquetas HTML",
+            "Drive Diseños Web",
+            "GitHub Frontend HTML"
+        ],
+        equipo: [
+            { nombre: "Lucía", rol: "Diseñadora" },
+            { nombre: "Carlos", rol: "Frontend" }
+        ] },
+        { id: 3, titulo: "CSS", categoria: "Diseño", estado: "En curso", 
+         descripcion: 
+                "Proyecto orientado al diseño visual de interfaces web mediante CSS. Se utilizaron propiedades de estilos, flexbox y grid para organizar el contenido. Además, se trabajó en la creación de diseños responsivos adaptados a dispositivos móviles, tablets y computadoras de escritorio.",
+            recursos: [
+                "PDF Flexbox y Grid",
+                "Drive Recursos CSS",
+                "GitHub Estilos Web"
+            ],
+
+            equipo: [
+                { nombre: "Ana", rol: "UI Designer" },
+                { nombre: "Pedro", rol: "Frontend" }
+            ]
+        },
+        { id: 4, titulo: "JavaScript", categoria: "Interactividad", estado: "En curso" ,
+                descripcion: " Proyecto enfocado en agregar interactividad a páginas web utilizando JavaScript.Se implementaron eventos, manipulación del DOM y validaciones de formularios. También se desarrollaron funcionalidades dinámicas para mejorar la experiencia del usuario y optimizar la interacción con la aplicación.",
+        recursos: [
+            "PDF JavaScript Básico",
+            "Drive Ejercicios JS",
+            "GitHub Proyecto Interactivo"
+        ],
+        equipo: [
+            { nombre: "Sofía", rol: "Frontend" },
+            { nombre: "Martín", rol: "Backend" }
+        ]
+        },
+        { id: 5, titulo: "Python", categoria: "Data Science", estado: "Pendiente",
+              descripcion: "Proyecto introductorio al análisis de datos utilizando Python. Se trabajará con estructuras de datos, funciones y librerías orientadas a Data Science. El objetivo será desarrollar herramientas para procesar información, generar estadísticas y visualizar resultados de manera eficiente.",
+
+        recursos: [
+            "PDF Introducción a Python",
+            "Drive Dataset Proyecto",
+            "GitHub Data Science"
+        ],
+
+        equipo: [
+            { nombre: "Valentina", rol: "Analista de Datos" },
+            { nombre: "Diego", rol: "Programador Python" }
+        ]
+
+        },
     ];
     // Retorna una copia del arreglo de proyectos.
     // Se utiliza spread operator para evitar modificar
