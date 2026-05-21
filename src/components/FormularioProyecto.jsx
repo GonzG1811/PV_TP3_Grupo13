@@ -12,7 +12,7 @@ function FormularioProyecto({ alGuardar }) {
     const manejarEnvio = (e) => {
         e.preventDefault();
 
-        // Como "proyectoData" ya es un objeto, se manda directo
+        
         agregarProyecto(proyectoData);
 
         setProyectoData({
@@ -30,7 +30,7 @@ function FormularioProyecto({ alGuardar }) {
             <form onSubmit={manejarEnvio} className="form-crear">
                 <div className="input-group">
                     <label>Nombre del proyecto:</label>
-                    {/* PERSONA A: Actualiza el value y el onChange para apuntar al objeto */}
+                    
                     <input 
                         type="text" 
                         value={proyectoData.titulo} 
@@ -69,4 +69,3 @@ function FormularioProyecto({ alGuardar }) {
     );
 }
 
-export default FormularioProyecto;
