@@ -9,10 +9,15 @@ function FormularioProyecto({ alGuardar }) {
         estado: 'Pendiente'
     });
 
+    const { titulo, categoria, estado } = proyectoData;
+
     const manejarEnvio = (e) => {
         e.preventDefault();
 
+<<<<<<< HEAD
+=======
         
+>>>>>>> main
         agregarProyecto(proyectoData);
 
         setProyectoData({
@@ -30,10 +35,13 @@ function FormularioProyecto({ alGuardar }) {
             <form onSubmit={manejarEnvio} className="form-crear">
                 <div className="input-group">
                     <label>Nombre del proyecto:</label>
+<<<<<<< HEAD
+=======
                     
+>>>>>>> main
                     <input 
                         type="text" 
-                        value={proyectoData.titulo} 
+                        value={titulo} 
                         onChange={(e) => setProyectoData({ ...proyectoData, titulo: e.target.value })} 
                         placeholder="..." 
                         required 
@@ -44,7 +52,7 @@ function FormularioProyecto({ alGuardar }) {
                     <label>Tema / Categoría:</label>
                     <input 
                         type="text" 
-                        value={proyectoData.categoria} 
+                        value={categoria} 
                         onChange={(e) => setProyectoData({ ...proyectoData, categoria: e.target.value })} 
                         placeholder="..." 
                         required 
@@ -54,7 +62,7 @@ function FormularioProyecto({ alGuardar }) {
                 <div className="input-group">
                     <label>Estado:</label>
                     <select 
-                        value={proyectoData.estado} 
+                        value={estado} 
                         onChange={(e) => setProyectoData({ ...proyectoData, estado: e.target.value })}
                     >
                         <option value="Pendiente">Pendiente</option>
