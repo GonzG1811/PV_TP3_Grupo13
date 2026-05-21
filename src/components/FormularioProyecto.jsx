@@ -14,6 +14,10 @@ function FormularioProyecto({ alGuardar }) {
     const manejarEnvio = (e) => {
         e.preventDefault();
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> main
         agregarProyecto(proyectoData);
 
         setProyectoData({
@@ -31,6 +35,10 @@ function FormularioProyecto({ alGuardar }) {
             <form onSubmit={manejarEnvio} className="form-crear">
                 <div className="input-group">
                     <label>Nombre del proyecto:</label>
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> main
                     <input 
                         type="text" 
                         value={titulo} 
@@ -69,4 +77,3 @@ function FormularioProyecto({ alGuardar }) {
     );
 }
 
-export default FormularioProyecto;
