@@ -67,5 +67,4 @@ function FormularioProyecto({ alGuardar }) {
             </form>
         </section>
     );
-}
-
+}export default FormularioProyecto;
