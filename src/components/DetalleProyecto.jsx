@@ -23,20 +23,20 @@ const DetalleProyecto = ({ proyecto }) => {
             <h3>Recursos</h3>
 
             <ul>
-                {recursos.map((recurso, index) => (
-                    <li key={index}>{recurso}</li>
-                ))}
+            {recursos.map((recurso, index) => (
+            <li key={index}>{recurso}</li>
+                 ))}
             </ul>
 
             <h3>Equipo</h3>
 
-            <ul>
-                {equipo.map((persona, index) => (
-                    <li key={index}>
-                        {persona.nombre} - {persona.rol}
-                    </li>
-                ))}
-            </ul>
+           <ul>
+    {equipo.map((persona, index) => (
+        <li key={index}>
+            {persona.nombre}
+        </li>
+             ))}
+        </ul>
 
         </section>
     );
