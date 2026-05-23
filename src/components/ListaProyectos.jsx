@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
 import FormularioProyecto from './FormularioProyecto';
 import ProyectoCard from './ProyectoCard'; 
+import DetalleProyecto from './DetalleProyecto';
 
 const ListaProyectos = () => {
     const [proyectos, setProyectos] = useState(obtenerProyectos());
+    const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
     const actualizarLista = () => {
         setProyectos(obtenerProyectos());
     };
@@ -36,9 +38,11 @@ const ListaProyectos = () => {
                         key={proy.id} 
                         proyecto={proy}         // objeto completo como prop
                         onEliminar={handleEliminar} // función de eliminación como prop
+                        onVerDetalle={setProyectoSeleccionado}
                     />
                 ))}
             </section>
+            <DetalleProyecto proyecto={proyectoSeleccionado} />
         </main>
     );
 };
