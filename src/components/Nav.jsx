@@ -1,3 +1,5 @@
+import React from 'react';
+import fotoPerfil from '../assets/adriel.png';
 function Nav() {
   return (
     <nav className="nav-menu"> 
@@ -7,7 +9,7 @@ function Nav() {
         <li className="nav-items"><a href="#" className="nav-link">CONTACTO</a></li>
         <li className="nav-items perfil">
           <span className="user-nombre"><a href="#" className="nav-link">valen</a></span>
-          <img src="../img/adriel.png" alt="fotito" className="avatar" />
+          <img src={fotoPerfil} alt="fotito" className="avatar" />
         </li>
       </ul>
     </nav>
