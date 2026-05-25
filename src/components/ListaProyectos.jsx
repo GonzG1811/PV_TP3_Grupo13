@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
 import FormularioProyecto from './FormularioProyecto';
 import ProyectoCard from './ProyectoCard'; 
 import DetalleProyecto from './DetalleProyecto';
+import RegistroActividad from './RegistroActividad';
 
 const ListaProyectos = () => {
     const [proyectos, setProyectos] = useState(obtenerProyectos());
     const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+    const [ultimaModificacion, setUltimaModificacion] = useState('');
+
+    useEffect(() => {
+        const fechaActual = new Date().toLocaleString('es-AR');
+        setUltimaModificacion(fechaActual);
+    }, [proyectos]);
     const actualizarLista = () => {
         setProyectos(obtenerProyectos());
     };
+
     const handleEliminar = (id) => {
         eliminarProyecto(id);
         actualizarLista();
@@ -23,12 +31,13 @@ const ListaProyectos = () => {
     return (
         <main>
             <FormularioProyecto alGuardar={actualizarLista} />
-            <section style={{ marginTop: '30px', marginBottom: '10px' }}>
+            
+            <section>
+                {/* El input toma automáticamente tu estilo general */}
                 <input 
                     type="text" 
                     placeholder="Buscar proyecto por nombre..." 
                     onChange={handleBuscar} 
-                    style={{ width: '100%', padding: '10px' }}
                 />
             </section>
 
@@ -36,13 +45,16 @@ const ListaProyectos = () => {
                 {proyectos.map((proy) => (
                     <ProyectoCard 
                         key={proy.id} 
-                        proyecto={proy}         // objeto completo como prop
-                        onEliminar={handleEliminar} // función de eliminación como prop
+                        proyecto={proy} 
+                        onEliminar={handleEliminar} 
                         onVerDetalle={setProyectoSeleccionado}
                     />
                 ))}
             </section>
+
             <DetalleProyecto proyecto={proyectoSeleccionado} />
+            
+            <RegistroActividad fecha={ultimaModificacion} />
         </main>
     );
 };
