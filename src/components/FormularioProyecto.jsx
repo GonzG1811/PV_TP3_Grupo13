@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { agregarProyecto } from '../services/proyectoService';
 
-function FormularioProyecto({ alGuardar }) {
+function FormularioProyecto({ onAgregarProyecto }) {
 
     const [proyectoData, setProyectoData] = useState({
         titulo: '',
@@ -12,25 +11,25 @@ function FormularioProyecto({ alGuardar }) {
         equipo: ''
     });
 
-    const { titulo, categoria, estado,descripcion,recursos,equipo } = proyectoData;
+    const { titulo, categoria, estado, descripcion, recursos, equipo } = proyectoData;
 
     const manejarEnvio = (e) => {
         e.preventDefault();
 
-        agregarProyecto({
-    ...proyectoData,
+        const nuevoProyecto = {
+            ...proyectoData,
+            recursos: [
+                proyectoData.recursos
+            ],
+            equipo: [
+                {
+                    nombre: proyectoData.equipo,
+                    rol: ""
+                }
+            ]
+        };
 
-    recursos: [
-        proyectoData.recursos
-    ],
-
-    equipo: [
-        {
-            nombre: proyectoData.equipo,
-            rol: ""
-        }
-    ]
-});
+        onAgregarProyecto(nuevoProyecto);
 
         setProyectoData({
             titulo: '',
@@ -40,8 +39,6 @@ function FormularioProyecto({ alGuardar }) {
             recursos: '',
             equipo: ''
         });
-
-        alGuardar();
     };
 
     return (
@@ -81,56 +78,56 @@ function FormularioProyecto({ alGuardar }) {
                         <option value="Finalizado">Finalizado</option>
                     </select>
                 </div>
+                
                 <div className="input-group">
-    <label>Descripción:</label>
+                    <label>Descripción:</label>
+                    <textarea
+                        value={descripcion}
+                        onChange={(e) =>
+                            setProyectoData({
+                                ...proyectoData,
+                                descripcion: e.target.value
+                            })
+                        }
+                        placeholder="Descripción del proyecto"
+                        required
+                    />
+                </div>
 
-    <textarea
-        value={descripcion}
-        onChange={(e) =>
-            setProyectoData({
-                ...proyectoData,
-                descripcion: e.target.value
-            })
-        }
-        placeholder="Descripción del proyecto"
-        required
-    />
-</div>
+                <div className="input-group">
+                    <label>Recursos:</label>
+                    <input
+                        type="text"
+                        value={recursos}
+                        onChange={(e) =>
+                            setProyectoData({
+                                ...proyectoData,
+                                recursos: e.target.value
+                            })
+                        }
+                        placeholder="PDF, Drive, GitHub"
+                    />
+                </div>
 
-<div className="input-group">
-    <label>Recursos:</label>
-
-    <input
-        type="text"
-        value={recursos}
-        onChange={(e) =>
-            setProyectoData({
-                ...proyectoData,
-                recursos: e.target.value
-            })
-        }
-        placeholder="PDF, Drive, GitHub"
-    />
-</div>
-
-<div className="input-group">
-    <label>Equipo:</label>
-
-    <input
-        type="text"
-        value={equipo}
-        onChange={(e) =>
-            setProyectoData({
-                ...proyectoData,
-                equipo: e.target.value
-            })
-        }
-        placeholder="Gustavo - Frontend"
-    />
-</div>
+                <div className="input-group">
+                    <label>Equipo:</label>
+                    <input
+                        type="text"
+                        value={equipo}
+                        onChange={(e) =>
+                            setProyectoData({
+                                ...proyectoData,
+                                equipo: e.target.value
+                            })
+                        }
+                        placeholder="Gustavo - Frontend"
+                    />
+                </div>
 
                 <button type="submit" className="btn-crear">Crear Proyecto</button>
             </form>
         </section>
     );
-}export default FormularioProyecto;
+}
+
+export default FormularioProyecto;

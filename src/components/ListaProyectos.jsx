@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
+import { obtenerProyectos, eliminarProyecto, buscarProyecto, agregarProyecto } from '../services/proyectoService';
 import FormularioProyecto from './FormularioProyecto';
 import ProyectoCard from './ProyectoCard'; 
 import DetalleProyecto from './DetalleProyecto';
@@ -14,8 +14,15 @@ const ListaProyectos = () => {
         const fechaActual = new Date().toLocaleString('es-AR');
         setUltimaModificacion(fechaActual);
     }, [proyectos]);
+
     const actualizarLista = () => {
         setProyectos(obtenerProyectos());
+    };
+
+
+    const handleAgregarProyecto = (nuevoProyecto) => {
+        agregarProyecto(nuevoProyecto); 
+        actualizarLista(); 
     };
 
     const handleEliminar = (id) => {
@@ -30,10 +37,9 @@ const ListaProyectos = () => {
 
     return (
         <main>
-            <FormularioProyecto alGuardar={actualizarLista} />
+            <FormularioProyecto onAgregarProyecto={handleAgregarProyecto} />
             
             <section>
-                {/* El input toma automáticamente tu estilo general */}
                 <input 
                     type="text" 
                     placeholder="Buscar proyecto por nombre..." 
