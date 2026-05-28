@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
 import FormularioProyecto from './FormularioProyecto';
 import ProyectoCard from './ProyectoCard'; 
@@ -6,17 +6,29 @@ import DetalleProyecto from './DetalleProyecto';
 import RegistroActividad from './RegistroActividad';
 
 const ListaProyectos = () => {
-    const [proyectos, setProyectos] = useState(obtenerProyectos());
+    const listaInicial = obtenerProyectos();
+    const [proyectos, setProyectos] = useState(listaInicial);
+    const [proyectosFiltrados, setProyectosFiltrados] = useState(listaInicial);
     const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
-    const [ultimaModificacion, setUltimaModificacion] = useState('');
+    const [ultimaModificacion, setUltimaModificacion] = useState(null);
+    const primeraCarga = useRef(true);
+useEffect(() => {
 
-    useEffect(() => {
+    if (primeraCarga.current) {
+        primeraCarga.current = false;
+    } else {
         const fechaActual = new Date().toLocaleString('es-AR');
         setUltimaModificacion(fechaActual);
-    }, [proyectos]);
+    }
+
+}, [proyectos]);
     const actualizarLista = () => {
-        setProyectos(obtenerProyectos());
-    };
+
+    const listaActualizada = obtenerProyectos();
+
+    setProyectos(listaActualizada);
+    setProyectosFiltrados(listaActualizada);
+};
 
     const handleEliminar = (id) => {
         eliminarProyecto(id);
@@ -25,7 +37,7 @@ const ListaProyectos = () => {
 
     const handleBuscar = (e) => {
         const resultados = buscarProyecto(e.target.value);
-        setProyectos(resultados);
+        setProyectosFiltrados(resultados);
     };
 
     return (
@@ -42,7 +54,7 @@ const ListaProyectos = () => {
             </section>
 
             <section className="contenedor-cards">
-                {proyectos.map((proy) => (
+                {proyectosFiltrados.map((proy) => (
                     <ProyectoCard 
                         key={proy.id} 
                         proyecto={proy} 
@@ -54,7 +66,9 @@ const ListaProyectos = () => {
 
             <DetalleProyecto proyecto={proyectoSeleccionado} />
             
-            <RegistroActividad fecha={ultimaModificacion} />
+            {ultimaModificacion && (
+                <RegistroActividad fecha={ultimaModificacion} />
+                )}
         </main>
     );
 };
