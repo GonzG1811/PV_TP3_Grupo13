@@ -33,7 +33,6 @@ const ListaProyectos = () => {
             <FormularioProyecto alGuardar={actualizarLista} />
             
             <section>
-                {/* El input toma automáticamente tu estilo general */}
                 <input 
                     type="text" 
                     placeholder="Buscar proyecto por nombre..." 
