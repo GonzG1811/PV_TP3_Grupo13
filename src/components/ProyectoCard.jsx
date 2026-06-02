@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle }) => {
+const ProyectoCard = ({ proyecto, onEliminar }) => {
     const { id, titulo, categoria, estado } = proyecto;
+    const navigate = useNavigate();
     
     return (
         <div className="card">
@@ -9,9 +11,8 @@ const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle }) => {
             <p>Categoría: {categoria}</p>
             <p>Estado: <strong>{estado}</strong></p>            
             
-            {/* Los botones toman automáticamente tu estilo general de button */}
             <div>
-                <button onClick={() => onVerDetalle(proyecto)}>
+                <button onClick={() => navigate(`/proyectos/${id}`)}>
                     Ver Detalle
                 </button>
                 <button onClick={() => onEliminar(id)}>
