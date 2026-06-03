@@ -1,42 +1,33 @@
 import React, { useState } from 'react';
 import { agregarProyecto } from '../services/proyectoService';
+import { TextField, Button, Box, MenuItem, Typography } from '@mui/material';
 
 function FormularioProyecto({ alGuardar }) {
-
     const [proyectoData, setProyectoData] = useState({
         titulo: '',
         categoria: '',
         estado: 'Pendiente',
-        descripcion:'',
+        descripcion: '',
         recursos: '',
         equipo: ''
     });
 
-    const { titulo, categoria, estado,descripcion,recursos,equipo } = proyectoData;
+    const { titulo, categoria, estado, descripcion, recursos, equipo } = proyectoData;
 
     const manejarEnvio = (e) => {
         e.preventDefault();
 
         agregarProyecto({
-    ...proyectoData,
-
-    recursos: [
-        proyectoData.recursos
-    ],
-
-    equipo: [
-        {
-            nombre: proyectoData.equipo,
-            rol: ""
-        }
-    ]
-});
+            ...proyectoData,
+            recursos: [proyectoData.recursos],
+            equipo: [{ nombre: proyectoData.equipo, rol: "" }]
+        });
 
         setProyectoData({
             titulo: '',
             categoria: '',
             estado: 'Pendiente',
-            descripcion:'',
+            descripcion: '',
             recursos: '',
             equipo: ''
         });
@@ -45,92 +36,74 @@ function FormularioProyecto({ alGuardar }) {
     };
 
     return (
-        <section className="contenedor-formulario">
-            <h3>Crear Nuevo Proyecto</h3>
-            <form onSubmit={manejarEnvio} className="form-crear">
-                <div className="input-group">
-                    <label>Nombre del proyecto:</label>
-                    <input 
-                        type="text" 
-                        value={titulo} 
-                        onChange={(e) => setProyectoData({ ...proyectoData, titulo: e.target.value })} 
-                        placeholder="..." 
-                        required 
-                    />
-                </div>
+        <Box component="section" sx={{ maxWidth: 500, mx: 'auto', mt: 3, p: 3, boxShadow: 2, borderRadius: 2 }}>
+            <Typography variant="h5" gutterBottom>Crear Nuevo Proyecto</Typography>
 
-                <div className="input-group">
-                    <label>Tema / Categoría:</label>
-                    <input 
-                        type="text" 
-                        value={categoria} 
-                        onChange={(e) => setProyectoData({ ...proyectoData, categoria: e.target.value })} 
-                        placeholder="..." 
-                        required 
-                    />
-                </div>
+            <Box component="form" onSubmit={manejarEnvio} sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+                
+                <TextField 
+                    label="Nombre del proyecto" 
+                    variant="outlined"
+                    value={titulo} 
+                    onChange={(e) => setProyectoData({ ...proyectoData, titulo: e.target.value })} 
+                    required 
+                    fullWidth 
+                />
 
-                <div className="input-group">
-                    <label>Estado:</label>
-                    <select 
-                        value={estado} 
-                        onChange={(e) => setProyectoData({ ...proyectoData, estado: e.target.value })}
-                    >
-                        <option value="Pendiente">Pendiente</option>
-                        <option value="En curso">En curso</option>
-                        <option value="Finalizado">Finalizado</option>
-                    </select>
-                </div>
-                <div className="input-group">
-    <label>Descripción:</label>
+                <TextField 
+                    label="Tema / Categoría" 
+                    variant="outlined"
+                    value={categoria} 
+                    onChange={(e) => setProyectoData({ ...proyectoData, categoria: e.target.value })} 
+                    required 
+                    fullWidth 
+                />
 
-    <textarea
-        value={descripcion}
-        onChange={(e) =>
-            setProyectoData({
-                ...proyectoData,
-                descripcion: e.target.value
-            })
-        }
-        placeholder="Descripción del proyecto"
-        required
-    />
-</div>
+                <TextField 
+                    select 
+                    label="Estado" 
+                    value={estado} 
+                    onChange={(e) => setProyectoData({ ...proyectoData, estado: e.target.value })}
+                    fullWidth
+                >
+                    <MenuItem value="Pendiente">Pendiente</MenuItem>
+                    <MenuItem value="En curso">En curso</MenuItem>
+                    <MenuItem value="Finalizado">Finalizado</MenuItem>
+                </TextField>
 
-<div className="input-group">
-    <label>Recursos:</label>
+                <TextField 
+                    label="Descripción" 
+                    multiline
+                    rows={3}
+                    value={descripcion} 
+                    onChange={(e) => setProyectoData({ ...proyectoData, descripcion: e.target.value })} 
+                    required 
+                    fullWidth 
+                />
 
-    <input
-        type="text"
-        value={recursos}
-        onChange={(e) =>
-            setProyectoData({
-                ...proyectoData,
-                recursos: e.target.value
-            })
-        }
-        placeholder="PDF, Drive, GitHub"
-    />
-</div>
+                <TextField 
+                    label="Recursos (PDF, Drive, GitHub)" 
+                    variant="outlined"
+                    value={recursos} 
+                    onChange={(e) => setProyectoData({ ...proyectoData, recursos: e.target.value })} 
+                    fullWidth 
+                />
 
-<div className="input-group">
-    <label>Equipo:</label>
+                <TextField 
+                    label="Equipo (Ej: Gustavo - Frontend)" 
+                    variant="outlined"
+                    value={equipo} 
+                    onChange={(e) => setProyectoData({ ...proyectoData, equipo: e.target.value })} 
+                    fullWidth 
+                />
 
-    <input
-        type="text"
-        value={equipo}
-        onChange={(e) =>
-            setProyectoData({
-                ...proyectoData,
-                equipo: e.target.value
-            })
-        }
-        placeholder="Gustavo - Frontend"
-    />
-</div>
+                <Button type="submit" variant="contained" color="primary" size="large">
+                    Crear Proyecto
+                </Button>
 
-                <button type="submit" className="btn-crear">Crear Proyecto</button>
-            </form>
-        </section>
+            </Box>
+        </Box>
     );
-}export default FormularioProyecto;
+}
+
+export default FormularioProyecto;
