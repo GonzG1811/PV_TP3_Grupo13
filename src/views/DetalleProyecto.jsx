@@ -1,44 +1,70 @@
-const DetalleProyecto = ({ proyecto }) => {
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { obtenerProyectos } from '../services/proyectoService';
+import { Box, Typography, Paper, List, ListItem, Button } from '@mui/material';
+
+const DetalleProyecto = () => {
+    
+    const { id } = useParams();
+    
+   
+    const proyectos = obtenerProyectos();
+    const proyecto = proyectos.find(p => p.id === parseInt(id));
 
     if (!proyecto) {
-        return <p>No hay proyecto seleccionado</p>;
+        return (
+            <Box sx={{ mt: 4, textAlign: 'center' }}>
+                <Typography variant="h5" color="error">
+                    El proyecto no existe o no fue encontrado.
+                </Typography>
+                <Button component={Link} to="/proyectos" sx={{ mt: 2 }} variant="outlined">
+                    Volver
+                </Button>
+            </Box>
+        );
     }
 
-    const {
-        titulo,
-        descripcion,
-        recursos,
-        equipo
-    } = proyecto;
+    const { titulo, nombre, descripcion, recursos, equipo } = proyecto;
 
     return (
-        <section className="detalle-proyecto">
+        <Paper elevation={3} sx={{ p: 4, mt: 4 }} className="detalle-proyecto">
+            <Typography variant="h4" color="primary" gutterBottom>
+                {titulo || nombre}
+            </Typography>
 
-            <h2>{titulo}</h2>
+            <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+                Descripción
+            </Typography>
+            <Typography variant="body1" paragraph>
+                {descripcion}
+            </Typography>
 
-            <h3>Descripción</h3>
+            <Typography variant="h6" sx={{ mt: 2 }}>
+                Recursos
+            </Typography>
+            <List dense>
+                {recursos && recursos.map((recurso, index) => (
+                    <ListItem key={index}>• {recurso}</ListItem>
+                ))}
+            </List>
 
-            <p>{descripcion}</p>
+            <Typography variant="h6" sx={{ mt: 2 }}>
+                Equipo
+            </Typography>
+            <List dense>
+                {equipo && equipo.map((persona, index) => (
+                    <ListItem key={index}>
+                        • {persona.nombre || persona}
+                    </ListItem>
+                ))}
+            </List>
 
-            <h3>Recursos</h3>
-
-            <ul>
-            {recursos.map((recurso, index) => (
-            <li key={index}>{recurso}</li>
-                 ))}
-            </ul>
-
-            <h3>Equipo</h3>
-
-           <ul>
-    {equipo.map((persona, index) => (
-        <li key={index}>
-            {persona.nombre}
-        </li>
-             ))}
-        </ul>
-
-        </section>
+            <Box sx={{ mt: 4 }}>
+                <Button variant="contained" component={Link} to="/proyectos">
+                    Volver a la lista
+                </Button>
+            </Box>
+        </Paper>
     );
 };
 

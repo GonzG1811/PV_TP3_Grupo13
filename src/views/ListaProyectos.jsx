@@ -2,35 +2,30 @@ import React, { useState, useEffect, useRef } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
 import FormularioProyecto from '../components/FormularioProyecto';
 import ProyectoCard from '../components/ProyectoCard'; 
-import DetalleProyecto from './DetalleProyecto';
 import RegistroActividad from '../components/RegistroActividad';
+import { Box, TextField, Grid } from '@mui/material';
 
 const ListaProyectos = () => {
     const listaInicial = obtenerProyectos();
     const [proyectos, setProyectos] = useState(listaInicial);
     const [proyectosFiltrados, setProyectosFiltrados] = useState(listaInicial);
-    const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
     const [ultimaModificacion, setUltimaModificacion] = useState(null);
-const primeraCarga = useRef(0);
+    const primeraCarga = useRef(0);
 
-useEffect(() => {
+    useEffect(() => {
+        if (primeraCarga.current < 1) {
+            primeraCarga.current++;
+            return;
+        }
+        const fechaActual = new Date().toLocaleString('es-AR');
+        setUltimaModificacion(fechaActual);
+    }, [proyectos]);
 
-    if (primeraCarga.current < 1) {
-        primeraCarga.current++;
-        return;
-    }
-
-    const fechaActual = new Date().toLocaleString('es-AR');
-    setUltimaModificacion(fechaActual);
-
-}, [proyectos]);
     const actualizarLista = () => {
-
-    const listaActualizada = obtenerProyectos();
-
-    setProyectos(listaActualizada);
-    setProyectosFiltrados(listaActualizada);
-};
+        const listaActualizada = obtenerProyectos();
+        setProyectos(listaActualizada);
+        setProyectosFiltrados(listaActualizada);
+    };
 
     const handleEliminar = (id) => {
         eliminarProyecto(id);
@@ -43,34 +38,34 @@ useEffect(() => {
     };
 
     return (
-        <main>
+        <Box component="main" sx={{ mt: 2 }}>
             <FormularioProyecto alGuardar={actualizarLista} />
             
-            <section>
-                <input 
-                    type="text" 
-                    placeholder="Buscar proyecto por nombre..." 
+            <Box sx={{ my: 3 }}>
+                <TextField 
+                    fullWidth
+                    label="Buscar proyecto por nombre..."
+                    variant="outlined"
                     onChange={handleBuscar} 
                 />
-            </section>
+            </Box>
 
-            <section className="contenedor-cards">
+            <Grid container spacing={3} className="contenedor-cards">
                 {proyectosFiltrados.map((proy) => (
-                    <ProyectoCard 
-                        key={proy.id} 
-                        proyecto={proy} 
-                        onEliminar={handleEliminar} 
-                        onVerDetalle={setProyectoSeleccionado}
-                    />
+                    <Grid item xs={12} sm={6} md={4} key={proy.id}>
+                        <ProyectoCard 
+                            proyecto={proy} 
+                            onEliminar={handleEliminar} 
+                            
+                        />
+                    </Grid>
                 ))}
-            </section>
+            </Grid>
 
-            <DetalleProyecto proyecto={proyectoSeleccionado} />
-            
             {ultimaModificacion && (
                 <RegistroActividad fecha={ultimaModificacion} />
-                )}
-        </main>
+            )}
+        </Box>
     );
 };
 
