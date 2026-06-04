@@ -6,10 +6,9 @@ import Footer from './components/Footer';
 import ListaProyectos from './views/ListaProyectos';
 import DetalleProyecto from './views/DetalleProyecto';
 import './css/estilos.css';
+import Dashboard from './views/Dashboard';
+import PerfilUsuario from './views/PerfilUsuario';
 
-
-const Dashboard = () => <h2>Pantalla Dashboard (En construcción)</h2>;
-const PerfilUsuario = () => <h2>Pantalla Perfil de Usuario (En construcción)</h2>;
 
 function App() {
   return (
