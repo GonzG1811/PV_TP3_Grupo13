@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService';
-import FormularioProyecto from './FormularioProyecto';
-import ProyectoCard from './ProyectoCard'; 
+import FormularioProyecto from '../components/FormularioProyecto';
+import ProyectoCard from '../components/ProyectoCard'; 
 import DetalleProyecto from './DetalleProyecto';
-import RegistroActividad from './RegistroActividad';
+import RegistroActividad from '../components/RegistroActividad';
 
 const ListaProyectos = () => {
     const listaInicial = obtenerProyectos();
@@ -11,15 +11,17 @@ const ListaProyectos = () => {
     const [proyectosFiltrados, setProyectosFiltrados] = useState(listaInicial);
     const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
     const [ultimaModificacion, setUltimaModificacion] = useState(null);
-    const primeraCarga = useRef(true);
+const primeraCarga = useRef(0);
+
 useEffect(() => {
 
-    if (primeraCarga.current) {
-        primeraCarga.current = false;
-    } else {
-        const fechaActual = new Date().toLocaleString('es-AR');
-        setUltimaModificacion(fechaActual);
+    if (primeraCarga.current < 1) {
+        primeraCarga.current++;
+        return;
     }
+
+    const fechaActual = new Date().toLocaleString('es-AR');
+    setUltimaModificacion(fechaActual);
 
 }, [proyectos]);
     const actualizarLista = () => {
