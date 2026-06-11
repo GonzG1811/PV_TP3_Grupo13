@@ -1,3 +1,4 @@
+import { UsuarioProvider } from './context/UsuarioProvider';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container, Box } from '@mui/material';
 import Header from './components/Header';
@@ -9,9 +10,9 @@ import './css/estilos.css';
 import Dashboard from './views/Dashboard';
 import PerfilUsuario from './views/PerfilUsuario';
 
-
 function App() {
   return (
+    <UsuarioProvider>
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Nav />
@@ -28,6 +29,7 @@ function App() {
       
       <Footer />
     </Box>
+    </UsuarioProvider>
   );
 }
 

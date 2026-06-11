@@ -1,19 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
-// descomenten este
-// import { UsuarioContext } from '../context/UsuarioContext'; 
+import { UsuarioContext } from '../context/UsuarioContext'; 
 
 import fotoValen from '../assets/adriel.png';
 import fotoDefault from '../assets/sinfoto.png';
 
 function Nav() {
-  //borren este de abajo
-  const usuario = { nombre: 'valen', rol: 'Alumno' }; 
-
-  // descomenten esto
-  // const { usuario } = useContext(UsuarioContext); 
-
+  const { usuario } = useContext(UsuarioContext); 
   const fotoPerfil = usuario?.nombre?.toLowerCase() === 'valen' ? fotoValen : fotoDefault;
 
   return (

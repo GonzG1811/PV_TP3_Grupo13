@@ -1,0 +1,56 @@
+/* Estilos para el Componente de Registro de Actividad */
+
+.registro-actividad {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 2px solid #e0e0e0;
+}
+
+.registro-container {
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border-left: 5px solid #4CAF50;
+  padding: 1.25rem 1.75rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: slideInUp 0.4s ease-out;
+}
+
+.registro-fecha {
+  margin: 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.registro-fecha::before {
+  content: '📅';
+  font-size: 1.2rem;
+}
+
+/* Animación de entrada suave */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo para dispositivos móviles */
+@media (max-width: 768px) {
+  .registro-container {
+    padding: 1rem 1.25rem;
+  }
+
+  .registro-fecha {
+    font-size: 0.95rem;
+  }
+}
