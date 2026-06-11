@@ -8,7 +8,7 @@ import DetalleProyecto from './views/DetalleProyecto';
 import './css/estilos.css';
 import Dashboard from './views/Dashboard';
 import PerfilUsuario from './views/PerfilUsuario';
-
+import Contacto from './views/Contacto';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route path="/perfil" element={<PerfilUsuario />} />
           <Route path="/proyectos" element={<ListaProyectos />} />
           <Route path="/proyectos/:id" element={<DetalleProyecto />} />
+          <Route path="/contacto" element={<Contacto />} />
         </Routes>
       </Container>
       

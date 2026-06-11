@@ -1,5 +1,4 @@
 // src/views/Dashboard.jsx
-
 import {
   Container,
   Typography,
@@ -8,7 +7,18 @@ import {
   Grid
 } from "@mui/material";
 
+import { obtenerProyectos } from "../services/proyectoService";
+
 function Dashboard() {
+
+  const proyectos = obtenerProyectos();
+
+  const totalProyectos = proyectos.length;
+
+  const proyectosEnCurso = proyectos.filter(
+    proyecto => proyecto.estado === "En curso"
+  ).length;
+
   return (
     <Container sx={{ mt: 4 }}>
       <Typography variant="h4" gutterBottom>
@@ -27,7 +37,7 @@ function Dashboard() {
                 Total de proyectos
               </Typography>
               <Typography variant="h4">
-                12
+                {totalProyectos}
               </Typography>
             </CardContent>
           </Card>
@@ -40,7 +50,7 @@ function Dashboard() {
                 Proyectos en curso
               </Typography>
               <Typography variant="h4">
-                5
+                {proyectosEnCurso}
               </Typography>
             </CardContent>
           </Card>
