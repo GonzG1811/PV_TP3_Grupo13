@@ -27,57 +27,78 @@ body{
     letter-spacing: 1px;
 }
 
-/* ================= NAV ================= */
-
-.nav-menu{
-    background-color: #2563eb;
-    padding: 12px 25px;
+/* ==================== NAV ==================== */
+.nav-menu {
+  background-color: #2563eb;
+  padding: 12px 25px;
 }
 
-.nav-lista{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
+.nav-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
 }
 
-.nav-items{
-    display: flex;
-    align-items: center;
+.nav-items {
+  display: flex;
+  align-items: center;
 }
 
-.nav-link{
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 15px;
-    transition: 0.3s;
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 15px;
+  transition: 0.3s;
 }
 
-.nav-link:hover{
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 5px;
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
 }
 
-/* PERFIL */
-
-.perfil{
-    gap: 10px;
+/* ==================== PERFIL ==================== */
+.nav-items.perfil {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.user-nombre{
-    color: white;
-    font-weight: bold;
+.nav-link.user-profile-button {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding: 4px 10px; 
+  border-radius: 6px;
+  background: transparent;
 }
 
-.avatar{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
+
+.nav-link.user-profile-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
+.user-profile-button .user-nombre {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.user-profile-button .user-rol {
+  color: #e0e0e0;
+  font-size: 0.8rem;
+  margin-top: 2px;
+  font-weight: normal;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
 /* ================= MAIN ================= */
 
 main{
